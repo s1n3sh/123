@@ -1,0 +1,48 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+struct Book {
+    string title;
+    string author;
+    string genre;
+    int pages;
+};
+
+bool checkGenre(const Book& book, const string& userGenre) {
+    return book.genre == userGenre;
+}
+
+bool checkPages(const Book& book, int userPages) {
+    return book.pages <= userPages;
+}
+
+void suggestBook(const Book& book) {
+    cout << "Мы рекомендуем вам книгу \"" << book.title << "\" автора " << book.author << "." << endl;
+}
+
+int main() {
+    Book books[] = {
+        {"Джейн Эйр", "Шарлотта Бронте", "Роман", 500},
+        {"1984", "Джордж Оруэлл", "Фантастика", 350},
+        {"Гарри Поттер и философский камень", "Джоан Роулинг", "Фэнтези", 300}
+    };
+
+    string userGenre;
+    int userPages;
+
+    cout << "Введите жанр книги: ";
+    cin >> userGenre;
+
+    cout << "Введите максимальное количество страниц: ";
+    cin >> userPages;
+
+    for (const Book& book : books) {
+        if (checkGenre(book, userGenre) && checkPages(book, userPages)) {
+            suggestBook(book);
+        }
+    }
+
+    return 0;
+}
